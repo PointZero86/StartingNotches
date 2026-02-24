@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Modding;
 using Satchel.BetterMenus;
 using UnityEngine;
-using static StartingNotches.StartingNotches;
 
 namespace StartingNotches
 {
-    public class StartingNotches : Mod, ITogglableMod, ICustomMenuMod, IGlobalSettings<GlobalSettingsClass> {
+    public class StartingNotches : Mod, ITogglableMod, ICustomMenuMod, IGlobalSettings<GlobalSettings> {
+
+        public static GlobalSettings GS { get; set; } = new();
         new public string GetName() => "Starting Notches";
-        public override string GetVersion() => "1.0.0";
+        public override string GetVersion() => "1.0.1";
 
         private static StartingNotches instance;
         public StartingNotches() : base("Starting Notches") {
@@ -24,30 +25,18 @@ namespace StartingNotches
             }
         }
 
-        // Global Settings
-        public class GlobalSettingsClass
+        // Global Settings Thingies
+        void IGlobalSettings<GlobalSettings>.OnLoadGlobal(GlobalSettings s)
         {
-            public int extraNotches = 2;
+            GS = s ?? new();
         }
-
-        // "Create and initalize a local variable to be able to access the settings"
-        public static GlobalSettingsClass GS { get; set; } = new GlobalSettingsClass();
-
-        // "First method to implement. The parameter is the read settings from the file"
-        public void OnLoadGlobal(GlobalSettingsClass s)
+        GlobalSettings IGlobalSettings<GlobalSettings>.OnSaveGlobal()
         {
-            GS = s; // "save the read data into local variable"
+            return GS ?? new();
         }
-
-        public GlobalSettingsClass OnSaveGlobal()
-        {
-            return GS; // "return the local variable so it can be written in the json file"
-        }
-
 
         // Menu Thingies
         private Menu MenuRef;
-        public bool ToggleButtonInsideMenu => true; // Toggle Option Appears Within Mod Menu
         public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? modToggleDelegates)
         {
             MenuRef = new Menu (
@@ -72,6 +61,7 @@ namespace StartingNotches
             );
             return MenuRef.GetMenuScreen(modListMenu);
         }
+        public bool ToggleButtonInsideMenu => true; // Toggle Option Appears Within Mod Menu
 
         public override void Initialize(Dictionary<string, Dictionary<string, GameObject>> preloadedObjects)
         {

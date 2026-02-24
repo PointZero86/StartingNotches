@@ -1,5 +1,7 @@
-# StartingNotches
+# AdjustableExtraNotches
 
-A mod that adds an adjustable number of Charm Notches.
+A mod that lets you add extra Charm Notches!
 
-It can be enabled/disabled in the Mod Settings menu.
+The amount added can be changed in the mod menu, ranging from 0 to 20 Notches.
+
+Extra Notches are removed when the mod is disabled.
