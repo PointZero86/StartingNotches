@@ -1,3 +1,5 @@
 # StartingNotches
 
-A mod for the game Hollow Knight.
+A mod that adds an adjustable number of Charm Notches.
+
+It can be enabled/disabled in the Mod Settings menu.
