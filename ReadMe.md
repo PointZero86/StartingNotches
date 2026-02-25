@@ -1,4 +1,4 @@
-# AdjustableExtraNotches
+# StartingNotches / AdjustableExtraNotches
 
 A mod that lets you add extra Charm Notches!
 
